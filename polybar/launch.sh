@@ -1,14 +1,7 @@
 #!/bin/bash
 
-# Terminate already running bar instances
-killall -q polybar
+exec polybar wm &
+exec polybar volumebar &
+exec polybar timebar  &
+exec polybar logo 
 
-# Wait until the processes have been shut down
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-
-polybar -rq win &
-polybar -rq tray &
-polybar -rq ws &
-
-
-echo "Polybar launched..."

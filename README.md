@@ -15,7 +15,4 @@ To customize firefox:
 
 ### Screenshots
 
-![](scrot1.png)
-![](scrot2.png)
-![](scrot3.png)
-
+![](scrot.png)

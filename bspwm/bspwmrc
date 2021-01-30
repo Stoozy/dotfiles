@@ -2,20 +2,18 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor -d I II III IV V VI VII VIII
+bspc rule -a kitty state = floating rectangle=631x470+185+188
 
-bspc config border_width         2
+bspc config border_width         0
 bspc config window_gap          35
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-# wall
-feh --bg-scale ~/Pictures/ghilbi-wall.jpg
+exec picom --config ~/.config/picom.conf  	&
+exec feh --bg-scale ~/Pictures/wall.jpg 	&
+exec sh ~/.config/polybar/launch.sh         &
+exec dunst -conf ~/.config/dunst/dunstrc
 
-# polybar
-sh ~/.config/polybar/launch.sh
-
-#dunst
-dunst

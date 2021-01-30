@@ -1,0 +1,110 @@
+#info{
+    position: absolute;
+    height: 25vh;
+    width: 60vw;
+    top: 5vh;
+    left: 20vw;
+}
+
+#search{
+    position: absolute;
+    height: 6vh;
+    border: 0px solid #121212;
+    border-radius: 10px;
+    width: 60vw;
+    top: 40vh;
+    left:20vw;
+    background-color: #202020;
+    color: #f0f0f0;
+    text-indent: 30px;
+}
+
+#menu-container{
+    position: absolute;
+    display: flex;
+    left: 20vw;
+    top: 60vh;
+    width: 60vw;
+    height: 20vh;
+    background-color: #121212;
+}
+
+
+#menu-btn{
+    background-color: #202020;
+    flex:25%;
+    margin: 6px;
+    border-radius: 10px;
+}
+
+
+.logo{
+    width: 70px;
+    padding-top: 5vh;
+}
+
+.time{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#day{
+    font-family: "Source Code Pro";
+    color:  white;
+    font-size: 15vw;
+    display:none;
+}
+
+#hm{
+    font-family: "Source Code Pro";
+    font-weight: bold;
+    color:  white;
+    font-size: 10vw;
+
+}
+@media only screen and (max-width: 1000px) {
+    .time{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #hm{
+        font-family: "Source Code Pro";
+        font-weight: bold;
+        color:  white;
+        font-size: 20vw;
+    }
+    
+    #menu-container{
+        position: absolute;
+        display: flex;
+        flex-wrap: wrap;
+        left: 20vw;
+        top: 55vh;
+        width: 60vw;
+        height: 35vh;
+        background-color: #121212;
+        flex-direction: row;
+    }
+
+    #menu-btn{
+        background-color: #202020;
+        margin: 1vh;
+        flex: 40%;
+        display: table-cell;
+        vertical-align: middle;
+        border-radius: 10px;
+    }
+
+    .logo{
+        width: 70px;
+        padding-top: 17%;
+    }
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-family: "Source Code Pro";
+    color: #3e3e3e;
+    opacity: 1; /* Firefox */
+}
+

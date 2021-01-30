@@ -85,3 +85,4 @@ if has('gui_running')
     "set background=light
 endif
 
+set noswapfile

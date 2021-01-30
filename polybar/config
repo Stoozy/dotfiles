@@ -1,216 +1,134 @@
-;==========================================================
-;
-;
-;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
-;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
-;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
-;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
-;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
-;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
-;
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/polybar/polybar
-;
-;   The README contains a lot of information
-;
-;==========================================================
-
 [colors]
-
-background = ${xrdb:color0:#222}
-foreground = ${xrdb:color7:#bbb}
-highlight = ${xrdb:color15:#fff}
-
-;  _                    
-; | |__   __ _ _ __ ___ 
-; | '_ \ / _` | '__/ __|
-; | |_) | (_| | |  \__ \
-; |_.__/ \__,_|_|  |___/
+black = #121212
+white = #f0f0f0
+crimson = #FE8A85
 
 [bar/base]
-enable-ipc = true
-font-0=CozetteVector:pixelsize=9;2
-font-1=FontAwesome5Free:style=Solid:pixelsize=8:antialias=true;2
-font-2=IPAGothic:style=Regular:size=10:antialias=true;3
+font-0 = "Source Code Pro:size=10;2"
+font-1 = "Font Awesome 5 Free Solid:style=Solid;2"
+font-2 = "Wuncon Siji:size=20;2"
 
-padding = 2
-border-size = 0
-border-color = ${colors.foreground}
+monitor = "HDMI-1"
 
-height = 30
-;radius = 20
-;Works very well with a radius like this! Put it on every bar.
+dim-value = 1
 
-background = ${colors.background}
-foreground = ${colors.foreground}
-override-redirect=false
-offset-y = 10
+background = ${colors.black}
+foreground = ${colors.white}
 
-wm-restack = bspwm
+height= 2.5%
+offset-y = 1.2%
 
-[bar/ws]
+[bar/wm]
 inherit = bar/base
-width = 14.5%
+width = 15%
+offset-x = 5%
 
+modules-center = bspwm
 
-offset-x = 10
-line-size = 1
-
-modules-left = bspwm
-scroll-up = bspwm-desknext
-scroll-down = bspwm-deskprev
-
-[bar/win]
+[bar/logo]
 inherit = bar/base
-enable-ipc = true
-width = 25%
+width = 2%
+offset-x = 2%
+modules-center = logo
 
-offset-x = 37.5%
+[bar/volumebar]
+inherit =bar/base
+modules-center = pulseaudio
+width = 8%
+offset-x = 79%
 
-; Spotify (uses playerctl)
-; modules-left = previous playpause next 
-; modules-center = spotify
-; Mpd
-modules-center = xwindow
+[bar/timebar]
+inherit=bar/base
+modules-center = date
+modules-right = power
 
-[bar/tray]
-inherit = bar/base
-width = 9%
+width= 10%
 
-offset-x = 90.5%
-
-modules-left = pulseaudio time 
-
-;                      _       _           
-;  _ __ ___   ___   __| |_   _| | ___  ___ 
-; | '_ ` _ \ / _ \ / _` | | | | |/ _ \/ __|
-; | | | | | | (_) | (_| | |_| | |  __/\__ \
-; |_| |_| |_|\___/ \__,_|\__,_|_|\___||___/
-                                         
-[module/wsnumber]
-type = custom/script
-exec = bspc query -D -d focused --names
-tail = true
-interval = 0
-format-margin = 2
-format = "<label>"
-scroll-up = bspc desktop -f next
-scroll-down = bspc desktop -f prev
+offset-x = 88%
+padding-right = 2
 
 
+[module/date]
+format=  <label>
+type = internal/date
+date = %a, %m.%d%
 
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:33:...%
-label-margin = 2
+time = %H:%M
+label = %date% %time%
+label-font = 1
+label-active-font = 1
+
+
+[module/pulseaudio]
+type=internal/pulseaudio
+
+format-volume = <ramp-volume> <bar-volume> 
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+use-ui-max = true
+; Interval for volume increase/decrease (in percent points)
+interval = 5
+
+label-muted =  |─────────
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+ramp-volume-font = 2
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.crimson}
+bar-volume-foreground-1 = ${colors.crimson}
+bar-volume-foreground-2 = ${colors.crimson}
+bar-volume-foreground-3 = ${colors.crimson}
+bar-volume-foreground-4 = ${colors.crimson}
+bar-volume-foreground-5 = ${colors.crimson}
+bar-volume-foreground-6 = ${colors.crimson}
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 1
+bar-volume-fill = ─
+bar-volume-fill-font = 1
+bar-volume-empty = ─
+bar-volume-empty-font = 1 
+bar-volume-empty-foreground = ${colors.white}
+
+
+click-right = pavucontrol
+label-volume-font = 1
+
+[module/power]
+type = custom/text
+content = 
+
+content-foreground = ${colors.white}
+content-font = 4
+
+click-left = bspc quit
 
 [module/bspwm]
 type = internal/bspwm
-reverse-scroll = false
-label-focused = %name%
-label-focused-underline = ${colors.highlight}
-label-focused-foreground = ${colors.highlight}
+format= <label-state> 
+
+label-focused = 
+label-focused-foreground = ${colors.white}
+label-focused-underline = ${colors.crimson}
+
+
+label-occupied = 
+label-dimmed-underline = ${colors.crimson}
+label-occupied-underline = ${colors.crimson}
+
+label-empty = 
+label-empty-foreground = #aaa
+
+label-empty-padding = 1
+label-occupied-padding = 1
 label-focused-padding = 1
 
-label-occupied = %name%
-label-occupied-foreground = ${colors.highlight}
-label-occupied-padding = 1
-
-label-empty = %name%
-label-empty-padding = 1
-
-[module/mpd]
-type = internal/mpd
-host = 127.0.0.1
-port = 6600
-format-online = <icon-prev> <toggle> <icon-next>   <label-song>  <label-time>
-format-online-margin = 2
-
-format-offline = <label-offline>
-label-offline =   offline
-format-offline-padding = 2
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-
-label-song-maxlen = 50
-label-song-ellipsis = true
-
-[module/time]
-type = internal/date
-interval = 10
-format-margin = 2
-
-time = "%H:%M"
-date = "%d %b"
-
-label = %date%, %time%
-
-[module/pulseaudio]
-type = internal/pulseaudio
-
-format-volume-margin = 1
-format-volume = <ramp-volume> <label-volume>
-label-volume = %percentage:3:3%%
-use-ui-max = false
-interval = 5
-
-ramp-volume-0 = ""
-ramp-volume-1 = ""
-ramp-volume-2 = ""
-
-
-label-muted = "  muted"   
-label-muted-padding = 0
-
-;Spotify modules
-
-[module/previous]
-type = custom/script
-exec = echo " "
-exec-if = "pgrep spotify"
-click-left = "playerctl previous"
-
-
-[module/next]
-type = custom/script
-exec = echo "  "
-exec-if = "pgrep spotify"
-click-left = "playerctl next"
-
-[module/playpause]
-type = custom/script
-exec = spotifystatus
-exec-if = "pgrep spotify"
-format-padding = 1
-tail = true
-interval = 0
-click-left = "playerctl -p spotify play-pause"
-
-
-[module/spotify]
-type = custom/script
-exec = playerctl -p spotify metadata --format '{{artist}} - {{title}}'
-exec-if = "pgrep spotify"
-format-padding = 1
-tail = true
-interval = 1
-
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-;pseudo-transparency = true
-
-[global/wm]
-margin-top = 0
-margin-bottom = 0
-
-; vim:ft=dosini
-
+[module/logo]
+type = custom/text
+content = 
+content-foreground = ${colors.white}
+content-font = 3
+content-padding = 1
