@@ -22,16 +22,21 @@ Plug 'mattn/emmet-vim'
 Plug 'Yggdroot/indentLine'
 
 " Themes
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
+
 
 call plug#end()
 
 
 " theme
 syntax on
-colorscheme peachpuff 
+colorscheme gruvbox 
+set background=dark
+
+let g:gruvbox_contrast_dark='medium'
 
 set rnu
 set ma
@@ -41,7 +46,7 @@ set shiftwidth=4
 set expandtab
 set t_RV=
 
-let g:airline_theme='wombat'
+let g:airline_theme='gruvbox'
 
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:livepreview_engine = 'latexmk'
@@ -81,8 +86,3 @@ endfu
 com! CT call CompleteTags();
 
 
-if has('gui_running')
-    "set background=light
-endif
-
-set noswapfile
