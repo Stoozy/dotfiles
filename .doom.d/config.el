@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'gruvbox)
+(setq doom-theme 'gruvbox-dark-medium)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -133,6 +133,8 @@
 (setq lsp-rust-analyzer-server-display-inlay-hints t)
 
 ;; MU4E
+
+(setq mu4e-get-mail-command "mbsync -a")
 
 (setq mu4e-sent-folder "/Gmail/sent"
       ;; mu4e-sent-messages-behavior 'delete ;; Unsure how this should be configured
